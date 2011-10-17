@@ -39,10 +39,10 @@
         </form>
 	</div>
 	
-	<div data-role="footer">
-        <div data-role="navbar" data-position="fixed">
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+        <div data-role="navbar">
             <ul>
-            	<li><a href="#create" class="ui-btn-active">Create</a></li>
+            	<li><a href="#create" class="ui-btn-active ui-state-persist">Create</a></li>
                 <li><a href="#view">View</a></li>
             </ul>
         </div>
@@ -77,11 +77,11 @@ $r = mysql_query($q, $dbc);
 ?>
        </div>
 	</div>
-	<div data-role="footer">
-        <div data-role="navbar" data-position="fixed">
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+        <div data-role="navbar">
             <ul>
             	<li><a href="#create" data-direction="reverse" >Create</a></li>
-                <li><a href="#view" class="ui-btn-active">View</a></li>
+                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
             </ul>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('mysql_connect.php');
 
 
@@ -28,8 +29,7 @@ $last_id = mysql_insert_id();
 for ($i=1; $i<=3; $i++) {
 $r2 = mysql_query("INSERT INTO datetime VALUE ('$last_id', '$datetime[$i]', NULL)", $dbc);
 }
-
-header('Location: index.php#view');
-
 mysql_close($dbc);
+header('Location: index.php#view');
+ob_end_flush();
 ?>
