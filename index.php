@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="doodle.css" />
 	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.js"></script>
+    <script>
+	$(document).ready(function(){
+		$('input[type="datetime"]').addClass("ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c");
+		$('#save').click(function() {
+			$('#submit').submit();
+		});
+	});
+	</script>
 </head> 
 
 	
@@ -16,7 +24,9 @@
 <div data-role="page" id="create">
 
 	<div data-role="header">
-		<h1>Create Task</h1>
+		<a href="#" data-icon="delete">Cancel</a>
+        <h1>Create Task</h1>
+        <a href="#" data-icon="check" data-theme="b" id="save">Save</a>
 	</div>
 
 	<div data-role="content">	
@@ -31,10 +41,12 @@
         </div>
         
         Select Dates and Times: <br>
-            <input type="datetime" name="datetime1" id="datetime1" value=""  />	<br>
-            <input type="datetime" name="datetime2" id="datetime2" value=""  step="15"/> <br>
-            <input type="datetime" name="datetime3" id="datetime3" value=""  />	<br>
-        <input type="submit" value="Organize!" />
+        <div data-role="fieldcontain">
+            <input type="datetime" name="datetime1" id="datetime1" value="" /> <br>
+            <input type="datetime" name="datetime2" id="datetime2" value="" /> <br>
+            <input type="datetime" name="datetime3" id="datetime3" value="" /> <br>
+        </div>    
+        <input type="submit" value="Organize!" id="submit" />
         
         </form>
 	</div>
@@ -70,7 +82,7 @@ $r = mysql_query($q, $dbc);
 		if($r) {
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
-        		<a href="index.html" data-role="button"><?php echo $row['title'] ?></a>
+        		<a href="index.html" data-role="button"><?php echo stripslashes($row['title']) ?></a>
 <?php
 			}
 		}

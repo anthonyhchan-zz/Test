@@ -1,6 +1,7 @@
 <?php
 
 ini_set('display_errors', 1);
+ini_set( 'magic_quotes_gpc', 0 );
 
 define ('HOST', 'localhost');
 define ('USER', 'anthonyhchan');
