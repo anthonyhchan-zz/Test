@@ -46,7 +46,7 @@ $r = mysql_query($q, $dbc);
 		if($r) {
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
-				<li><a href="#"><?php echo stripslashes($row['title']) ?></a></li>
+				<li><a href="index.php#detailed_view?id=<?php echo $row['event_id']; ?>"><?php echo stripslashes($row['title']) ?></a></li>
 <?php
 			}
 		}
@@ -64,7 +64,7 @@ $r = mysql_query($q, $dbc);
 </div>
 <!-- end of view page-->
 <!-- start of detailed view page -->
-<div data-role="page" id="#detailed_view" data-add-back-btn="true">
+<div data-role="page" id="detailed_view" data-add-back-btn="true">
 
 <?php
 $id = $row['event_id'];
