@@ -46,7 +46,7 @@ $r = mysql_query($q, $dbc);
 		if($r) {
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
-				<li><a href="index.php#detailed_view?id=<?php echo($row['event_id']) ?>"><?php echo stripslashes($row['title']) ?></a></li>
+				<li><a href="#"><?php echo stripslashes($row['title']) ?></a></li>
 <?php
 			}
 		}
