@@ -12,7 +12,10 @@
 	$(document).ready(function(){
 		$('input[type="datetime"]').addClass("ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c");
 		$('#save').click(function() {
-			$('#submit').submit();
+			$('form').submit();
+		});
+		$('#refresh').click(function() {
+			location.reload();
 		});
 	});
 	</script>
@@ -20,11 +23,92 @@
 
 	
 <body> 
+
+<!-- start of view page -->
+<div data-role="page" id="view">
+
+<?php
+include('mysql_connect.php');
+
+$q = "SELECT * FROM event";
+
+$r = mysql_query($q, $dbc);
+?>
+
+	<div data-role="header">
+    	<a href="#" data-icon="refresh" id="refresh">Refresh</a>
+		<h1>Events</h1>
+	</div>
+
+	<div data-role="content">	
+ 		<ul data-role="listview">
+<?php 
+		if($r) {
+			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
+?>
+				<li><a href="index.php#detailed_view?id=<?php echo($row['event_id']) ?>"><?php echo stripslashes($row['title']) ?></a></li>
+<?php
+			}
+		}
+?>
+       </ul>
+	</div>
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
+                <li><a href="#create">Create</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- end of view page-->
+<!-- start of detailed view page -->
+<div data-role="page" id="detailed_view">
+
+<?php
+$id = $_GET['id'];
+
+$q = "SELECT * FROM datetime WHERE event_id = $id";
+
+$r = mysql_query($q, $dbc);
+?>
+
+	<div data-role="header">
+		<h1>Event Details</h1>
+	</div>
+
+	<div data-role="content">	
+    <ul data-role="listview">
+<?php 
+	if($r) {
+			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
+?>
+				<li data-role="list-divider">Details</li>
+                <li><?php echo stripslashes($row['datetime']) ?></a></li>
+<?php
+			}
+		}
+?>
+    </ul>
+    
+	</div>
+    
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
+                <li><a href="#create">Create</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- end of detailed view page-->
 <!-- start of create page -->
 <div data-role="page" id="create">
 
 	<div data-role="header">
-		<a href="#" data-icon="delete">Cancel</a>
+		<a href="index.php#view" data-icon="delete">Cancel</a>
         <h1>Create Task</h1>
         <a href="#" data-icon="check" data-theme="b" id="save">Save</a>
 	</div>
@@ -45,59 +129,19 @@
             <input type="datetime" name="datetime1" id="datetime1" value="" /> <br>
             <input type="datetime" name="datetime2" id="datetime2" value="" /> <br>
             <input type="datetime" name="datetime3" id="datetime3" value="" /> <br>
-        </div>    
-        <input type="submit" value="Organize!" id="submit" />
-        
+        </div>       
         </form>
 	</div>
 	
 	<div data-role="footer" data-id="foo1" data-position="fixed">
         <div data-role="navbar">
             <ul>
-            	<li><a href="#create" class="ui-btn-active ui-state-persist">Create</a></li>
-                <li><a href="#view">View</a></li>
+            	<li><a href="#view" data-direction="reverse" >View</a></li>
+                <li><a href="#create" class="ui-btn-active ui-state-persist">Create</a></li>
             </ul>
         </div>
     </div>
 </div>
 <!-- end of create page-->
-<!-- start of view page -->
-<div data-role="page" id="view">
-
-<?php
-include('mysql_connect.php');
-
-$q = "SELECT * FROM event";
-
-$r = mysql_query($q, $dbc);
-?>
-
-	<div data-role="header">
-		<h1>Events</h1>
-	</div>
-
-	<div data-role="content">	
-        <div data-role="controlgroup">
-<?php 
-		if($r) {
-			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
-?>
-        		<a href="index.html" data-role="button"><?php echo stripslashes($row['title']) ?></a>
-<?php
-			}
-		}
-?>
-       </div>
-	</div>
-	<div data-role="footer" data-id="foo1" data-position="fixed">
-        <div data-role="navbar">
-            <ul>
-            	<li><a href="#create" data-direction="reverse" >Create</a></li>
-                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- end of view page-->
 </body>
 </html>
