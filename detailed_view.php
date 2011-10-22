@@ -4,7 +4,7 @@ include ('mysql_connect.php');
 ?>
 
 <!-- start of detailed view page -->
-<div data-role="page" id data-add-back-btn="true">
+<div data-role="page" id="detailed_view" data-add-back-btn="true">
 
 <?php
 $id = $_GET['id'];
