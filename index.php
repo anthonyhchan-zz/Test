@@ -1,28 +1,6 @@
-<!DOCTYPE html> 
-<html> 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width; initial-scale=1; user-scalable=no;"> 
-	<title>Multi-page template</title> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.css" />
-    <link rel="stylesheet" href="doodle.css" />
-	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.js"></script>
-    <script>
-	$(document).ready(function(){
-		$('input[type="datetime"]').addClass("ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c");
-		$('#save').click(function() {
-			$('form').submit();
-		});
-		$('#refresh').click(function() {
-			location.reload();
-		});
-	});
-	</script>
-</head> 
-
-	
-<body> 
+<?php
+include ('header.php');
+?>
 
 <!-- start of view page -->
 <div data-role="page" id="view">
@@ -46,7 +24,7 @@ $r = mysql_query($q, $dbc);
 		if($r) {
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
-				<li><a href="index.php#detailed_view?id=<?php echo $row['event_id']; ?>"><?php echo stripslashes($row['title']) ?></a></li>
+				<li><a href="detailed_view.php?id=<?php echo $row['event_id']; ?>"><?php echo stripslashes($row['title']) ?></a></li>
 <?php
 			}
 		}
@@ -63,47 +41,6 @@ $r = mysql_query($q, $dbc);
     </div>
 </div>
 <!-- end of view page-->
-<!-- start of detailed view page -->
-<div data-role="page" id="detailed_view" data-add-back-btn="true">
-
-<?php
-$id = $row['event_id'];
-
-$q = "SELECT * FROM datetime WHERE event_id = $id";
-
-$r = mysql_query($q, $dbc);
-?>
-
-	<div data-role="header">
-		<h1>Event Details</h1>
-	</div>
-
-	<div data-role="content">	
-    <ul data-role="listview">
-<?php 
-	if($r) {
-			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
-?>
-				<li data-role="list-divider">Details</li>
-                <li><?php echo stripslashes($row['datetime']) ?></a></li>
-<?php
-			}
-		}
-?>
-    </ul>
-    
-	</div>
-    
-	<div data-role="footer" data-id="foo1" data-position="fixed">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
-                <li><a href="#create">Create</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- end of detailed view page-->
 <!-- start of create page -->
 <div data-role="page" id="create">
 
@@ -143,5 +80,3 @@ $r = mysql_query($q, $dbc);
     </div>
 </div>
 <!-- end of create page-->
-</body>
-</html>
