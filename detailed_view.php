@@ -19,14 +19,21 @@ $r = mysql_query($q, $dbc);
 		<h1>Event Details</h1>
 	</div>
 
-	<div data-role="content">	
+	<div data-role="content">
+    <label for="name">Name:</label>	
+    <input type="text" name="name" id="name" value="" /> <br><br><br>
     <ul data-role="listview">
     <li data-role="list-divider">Details</li>
 <?php 
 	if($r) {
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
-                <li><?php echo stripslashes($row['datetime']) ?></a></li>
+                <li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
+                	<div class="no_score"></div>
+                    <div class="yes_score"></div>
+                    <div class="check_mark"></div>
+                    <div class="cross_mark"></div>
+               	</li>
 <?php
 			}
 		}
@@ -38,8 +45,8 @@ $r = mysql_query($q, $dbc);
 	<div data-role="footer" data-id="foo1" data-position="fixed">
         <div data-role="navbar">
             <ul>
-                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
-                <li><a href="#create">Create</a></li>
+                <li><a href="index.php#view" class="ui-btn-active ui-state-persist" rel="external">View</a></li>
+                <li><a href="index.php#create" rel="external">Create</a></li>
             </ul>
         </div>
     </div>

@@ -1,3 +1,33 @@
 #submit {
 	display: hidden;	
 }
+
+.check_mark, .cross_mark{
+	height: 15px;
+	width: 15px;
+	margin: auto 40px auto 10px;	
+	float: right;
+	vertical-align:middle;	
+	text-align: center;
+}
+.yes_score {
+	height: 15px;
+	width:15px;
+	float: right;
+	background:#6F0;
+	border:medium;	
+}
+.no_score {
+	height: 15px;
+	width:15px;
+	float: right;
+	background:#C30;
+	border:medium;	
+	-webkit-
+}
+.check_mark {
+	background-image:url(img/tick.png);
+}
+.cross_mark {
+	background-image:url(img/cross.png);
+}

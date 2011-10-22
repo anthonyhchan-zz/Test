@@ -34,8 +34,8 @@ $r = mysql_query($q, $dbc);
 	<div data-role="footer" data-id="foo1" data-position="fixed">
         <div data-role="navbar">
             <ul>
-                <li><a href="#view" class="ui-btn-active ui-state-persist">View</a></li>
-                <li><a href="#create">Create</a></li>
+                <li><a href="index.php#view" class="ui-btn-active ui-state-persist">View</a></li>
+                <li><a href="index.php#create">Create</a></li>
             </ul>
         </div>
     </div>
@@ -73,8 +73,8 @@ $r = mysql_query($q, $dbc);
 	<div data-role="footer" data-id="foo1" data-position="fixed">
         <div data-role="navbar">
             <ul>
-            	<li><a href="#view" data-direction="reverse" >View</a></li>
-                <li><a href="#create" class="ui-btn-active ui-state-persist">Create</a></li>
+            	<li><a href="index.php#view" data-direction="reverse" >View</a></li>
+                <li><a href="index.php#create" class="ui-btn-active ui-state-persist">Create</a></li>
             </ul>
         </div>
     </div>
