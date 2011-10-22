@@ -15,8 +15,9 @@ $r = mysql_query($q, $dbc);
 
 ?>
 
-	<div data-role="header">
+	<div data-role="header" >
 		<h1>Event Details</h1>
+        <a href="#" data-icon="check" data-theme="b" id="event_save">Save</a>
 	</div>
 
 	<div data-role="content">
@@ -31,8 +32,7 @@ $r = mysql_query($q, $dbc);
                 <li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
                 	<div class="no_score"></div>
                     <div class="yes_score"></div>
-                    <div class="check_mark"></div>
-                    <div class="cross_mark"></div>
+                    <div class="checkbox"><input type="checkbox" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /></div>
                	</li>
 <?php
 			}
