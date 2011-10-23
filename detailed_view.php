@@ -17,7 +17,7 @@ $r = mysql_query($q, $dbc);
 
 	<div data-role="header" >
 		<h1>Event Details</h1>
-        <a href="#" data-icon="check" data-theme="b" id="event_save">Save</a>
+        <a href="#" data-icon="check" data-theme="b" id="event_save" class="ui-btn-right">Save</a>
 	</div>
 
 	<div data-role="content">
@@ -30,9 +30,11 @@ $r = mysql_query($q, $dbc);
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 ?>
                 <li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
-                	<div class="no_score"></div>
-                    <div class="yes_score"></div>
-                    <div class="checkbox"><input type="checkbox" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /></div>
+                	<div>
+                        <div data-role="fieldcontain">
+                            <select data-role="slider" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /><option value="no">Nope, I'm busy</option><option value="yes">Available</option></select>
+                        </div>   
+                    </div>    
                	</li>
 <?php
 			}
