@@ -15,6 +15,9 @@
 		$('#save').click(function() {
 			$('form').submit();
 		});
+		$('#event_save').click(function() {
+			$('#form2').submit();
+		});
 		$('#refresh').click(function() {
 			location.reload();
 		});

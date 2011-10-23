@@ -21,28 +21,31 @@ $r = mysql_query($q, $dbc);
 	</div>
 
 	<div data-role="content">
-    <label for="name">Name:</label>	
-    <input type="text" name="name" id="name" value="" /> <br><br><br>
-    <ul data-role="listview">
-    <li data-role="list-divider">Details</li>
-<?php 
-	if($r) {
-			while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
-?>
-                <li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
-                	<div>
-                        <div data-role="fieldcontain">
-                            <select data-role="slider" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /><option value="no">Nope, I'm busy</option><option value="yes">Available</option></select>
-                        </div>   
-                    </div>    
-               	</li>
-<?php
-			}
-		}
-?>
-    </ul>
-    
+        <form action="form2.php" method="post" data-ajax="false" id="form2">
+            <div data-role="fieldcontain">
+                <label for="name">Name:</label>	
+                <input type="text" name="name" id="name" value="" />  <br /><br />
+            </div>
+            <ul data-role="listview">
+            <li data-role="list-divider">Details</li>
+            <?php 
+			if($r) {
+            	while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {?>
+                	<li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
+                    	<div>
+                                <div data-role="fieldcontain">
+                                    <select data-role="slider" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /><option value=0>Nope, I'm busy</option><option value=1>Available</option></select>
+                                </div>   
+                            </div>    
+                        </li>
+        <?php
+                    }
+                }
+        ?>
+            </ul>
+            
 	</div>
+    </form>
     
 	<div data-role="footer" data-id="foo1" data-position="fixed">
         <div data-role="navbar">
