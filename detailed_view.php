@@ -7,11 +7,15 @@ include ('mysql_connect.php');
 <div data-role="page" id="detailed_view" data-add-back-btn="true">
 
 <?php
-$id = $_GET['id'];
+if(isset($_GET['id'])) {
 
-$q = "SELECT * FROM datetime WHERE event_id = $id";
+	$id = $_GET['id'];
+	
+	$q = "SELECT * FROM datetime WHERE event_id = $id";
+	
+	$r = mysql_query($q, $dbc);
 
-$r = mysql_query($q, $dbc);
+}
 
 ?>
 
@@ -21,7 +25,13 @@ $r = mysql_query($q, $dbc);
 	</div>
 
 	<div data-role="content">
-        <form action="form2.php" method="post" data-ajax="false" id="form2">
+    <?php
+    if(isset($_GET['status']) && $_GET['status'] == 1)
+	{
+		echo ("Success! Your vote is saved!");
+	}
+	?>
+        <form action="form2.php" method="POST" data-ajax="false" id="form2">
             <div data-role="fieldcontain">
                 <label for="name">Name:</label>	
                 <input type="text" name="name" id="name" value="" />  <br /><br />
@@ -32,19 +42,19 @@ $r = mysql_query($q, $dbc);
 			if($r) {
             	while($row = mysql_fetch_array($r, MYSQL_ASSOC)) {?>
                 	<li class="event_datetime"><?php echo date("j M Y (D), ga", strtotime($row['datetime'])) ?>
-                    	<div>
                                 <div data-role="fieldcontain">
-                                    <select data-role="slider" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] ?>" /><option value=0>Nope, I'm busy</option><option value=1>Available</option></select>
-                                </div>   
-                            </div>    
-                        </li>
-        <?php
-                    }
+                                    <select data-role="slider" name="<?php echo $row['datetime_id'] ?>" id="<?php echo $row['datetime_id'] 									?>" /><option value=0>Nope, I'm busy</option><option value=1>Available</option></select>
+                                    <div style="background:#C8FFC6" class="ui-li-count" id="yes_count<?php echo $row['datetime_id']?>"><?php echo $row['yes']?></div>
+                                    <div style="background:#FFBABE; margin-top:10px;" class="ui-li-count" id="no_count<?php echo $row['datetime_id']?>"><?php echo $row['no']?></div>
+                                </div>
+                    </li>
+        	        <?php
                 }
-        ?>
+            }?>
             </ul>
             
 	</div>
+    <input type="hidden" name="event_id" value="<?php echo $id?>"/>
     </form>
     
 	<div data-role="footer" data-id="foo1" data-position="fixed">

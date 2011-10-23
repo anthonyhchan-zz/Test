@@ -1,17 +1,3 @@
 #submit {
 	display: hidden;	
 }
-.yes_score {
-	height: 15px;
-	width:15px;
-	float: right;
-	background:#6F0;
-	border:medium;	
-}
-.no_score {
-	height: 15px;
-	width:15px;
-	float: right;
-	background:#C30;
-	border:medium;	
-}

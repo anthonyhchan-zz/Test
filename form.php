@@ -27,7 +27,7 @@ $r1 = mysql_query("INSERT INTO event VALUE (NULL, '$title', '$name', '$email')",
 $last_id = mysql_insert_id();
 
 for ($i=1; $i<=3; $i++) {
-$r2 = mysql_query("INSERT INTO datetime VALUE ('$last_id', '$datetime[$i]', NULL)", $dbc);
+$r2 = mysql_query("INSERT INTO datetime VALUE ('$last_id', '{$datetime[$i]}', NULL, 0 , 0)", $dbc);
 }
 mysql_close($dbc);
 header('Location: index.php#view');
